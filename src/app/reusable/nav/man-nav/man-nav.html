@@ -1,0 +1,85 @@
+
+<header
+  [@navContainer]
+  [@stickyHeaderState]="isHeaderStuck ? 'stuck' : 'idle'"
+  class="site-header sticky top-0 z-50 flex w-full flex-col items-start bg-brand-white/80"
+>
+  <div class="w-full" @upperNavEnter>
+    <app-upper-nav
+      [value]="20"
+      location="Ile-Ife, Osun State, Nigeria"
+    />
+  </div>
+
+  <nav
+    [@mobileNavState]="mobileMenuOpen ? 'open' : 'closed'"
+    @mainNavEnter
+    class="main-nav flex w-full items-center bg-brand-white"
+  >
+    <div class="logo-container-wrapper">
+       <img
+            [src]="logoSrc"
+            alt="{{ brandName }} logo"
+            class="y-footer-logo h-14 w-14 rounded-2xl object-contain bg-white/5 ring-1 ring-white/10 p-1"
+            loading="lazy"
+            width="56"
+            height="56"
+          />
+          <div class="logo-brandname-texts font-bold gap-0 ">
+
+
+          <span class="text-brand-ink "> {{brandName}}</span>
+          <span class="text-brand-orange">Academy</span>
+
+
+          </div>
+    </div>
+
+    <div class="nav-content">
+      <ul class="nav-links-list flex" @linkRow>
+        @for (link of navLinks; track link) {
+          <li
+            class="nav-link-item"
+            [@navLink]="link.path"
+            [@navLinkMobile]="mobileMenuOpen ? 'in' : 'out'"
+          >
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              [@navLinkTapState]="linkTapState(link.path)"
+              (click)="onLinkTap(link.path)"
+            >
+              {{ link.name }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <div class="button-wrapper" @linkRow>
+        <div
+          class="nav-link-item"
+          [@navLink]="'btn-login'"
+          [@navLinkMobile]="mobileMenuOpen ? 'in' : 'out'"
+        >
+          <app-button
+            buttonType="secondary"
+            buttonText="Login"
+            (Navclick)="navigateTolign()"
+          />
+        </div>
+
+        <div
+          class="nav-link-item"
+          [@navLink]="'btn-join'"
+          [@navLinkMobile]="mobileMenuOpen ? 'in' : 'out'"
+        >
+          <app-button
+            buttonType="primary"
+            buttonText="Join YRA"
+            (Navclick)="clickChildButton('join Yra')"
+          />
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

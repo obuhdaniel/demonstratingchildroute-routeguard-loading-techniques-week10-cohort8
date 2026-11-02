@@ -1,0 +1,15 @@
+<button
+  class="btn"
+  [ngClass]="{
+    'btn-primary': buttonType() === 'primary',
+    'btn-secondary': buttonType() === 'secondary',
+    'btn-ghost': buttonType() === 'ghost'
+  }"
+  (click)="onNavClick()"
+>
+  {{ buttonText() }}
+
+  @if (arrowRight){
+    <span class="arrow">&rarr;</span>
+  }
+</button>
